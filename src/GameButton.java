@@ -7,9 +7,12 @@ public class GameButton extends JButton implements ActionListener{
     ImageIcon allay, enemy;
     static int turn = 0;
     private boolean set = false;
-    public GameButton(int boardSize) {
+    private Point coordinates;
+    public GameButton(int boardSize, Point coordinates) {
 //        allay = new ImageIcon("src/img/catBG.png");
 //        enemy = new ImageIcon("src/img/dogBG.png");
+        setTurn();
+        this.coordinates = coordinates;
         allay = new ImageIcon("src/img/batman.png");
         enemy = new ImageIcon("src/img/joker.png");
         this.setBackground(Color.black);
@@ -27,7 +30,10 @@ public class GameButton extends JButton implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        setChosen();
+    }
 
+    public void setChosen() {
         if(!set) {
             turn++;
             switch (turn%2) {
@@ -41,10 +47,16 @@ public class GameButton extends JButton implements ActionListener{
                     break;
             }
         }
-
     }
-
     public boolean isSet() {
         return set;
+    }
+
+    public Point getCoordinates() {
+        return coordinates;
+    }
+
+    public static void setTurn() {
+        turn = 0;
     }
 }
