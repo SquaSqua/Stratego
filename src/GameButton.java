@@ -5,13 +5,13 @@ import java.awt.event.ActionListener;
 
 public class GameButton extends JButton implements ActionListener{
     ImageIcon allay, enemy;
-    static int turn = 0;
+//    static int turn;
     private boolean set = false;
     private Point coordinates;
     public GameButton(int boardSize, Point coordinates) {
+//        setTurn();
 //        allay = new ImageIcon("src/img/catBG.png");
 //        enemy = new ImageIcon("src/img/dogBG.png");
-        setTurn();
         this.coordinates = coordinates;
         allay = new ImageIcon("src/img/batman.png");
         enemy = new ImageIcon("src/img/joker.png");
@@ -35,8 +35,7 @@ public class GameButton extends JButton implements ActionListener{
 
     public void setChosen() {
         if(!set) {
-            turn++;
-            switch (turn%2) {
+            switch (OnePlayerGame.movesCounter%2) {
                 case 0:
                     setIcon(allay);
                     set = true;
@@ -56,7 +55,7 @@ public class GameButton extends JButton implements ActionListener{
         return coordinates;
     }
 
-    public static void setTurn() {
-        turn = 0;
-    }
+//    public static void setTurn() {
+//        turn = 0;
+//    }
 }

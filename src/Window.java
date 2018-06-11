@@ -13,7 +13,7 @@ public class Window extends JFrame implements ActionListener{
     JButton ok;
     JMenuBar menuBar;
     JMenu gameType;
-    JMenuItem onePlayer, twoPlayers, pcVsPc;
+    JMenuItem onePlayer, pcVsPc;
     Point currentButton;
     Game currentGame;
 
@@ -39,13 +39,9 @@ public class Window extends JFrame implements ActionListener{
         onePlayer = new JMenuItem("Jeden gracz");
         onePlayer.addActionListener(new OnePlayerAction());
 
-        twoPlayers = new JMenuItem("Dwóch graczy");
-        twoPlayers.addActionListener(new TwoPlayersAction());
-
         pcVsPc = new JMenuItem("PC vs PC");
 
         gameType.add(onePlayer);
-        gameType.add(twoPlayers);
         gameType.add(pcVsPc);
 
         menuBar.add(gameType);
@@ -82,13 +78,9 @@ public class Window extends JFrame implements ActionListener{
                     currentButton = b.getCoordinates();
                     System.out.println("my point: " + currentButton);
                     if(currentGame.getClass().equals(OnePlayerGame.class)) {
-                        ((OnePlayerGame)currentGame).addMovesCounter();
-                        ((OnePlayerGame)currentGame).setGameStatus(currentButton);
+                        currentGame.setGameStatus(currentButton);
                         ((OnePlayerGame)currentGame).player1Turn();
                         ((OnePlayerGame)currentGame).player2Turn();
-                    }
-                    else if(currentGame.getClass().equals(TwoPlayersGame.class)) {
-                        ((TwoPlayersGame)currentGame).addTurn();
                     }
                 }
             }
@@ -112,27 +104,12 @@ public class Window extends JFrame implements ActionListener{
                 w.setLocationRelativeTo(null);
                 w.pack();
                 w.currentGame = new OnePlayerGame(size, w);
-                GameButton.setTurn();
+                OnePlayerGame.movesCounter = 0;
                 dispose();
-                System.out.println("Turn: " + GameButton.turn);
             }
         }
     }
-    public class TwoPlayersAction implements ActionListener {
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if(e.getActionCommand().equals("Dwóch graczy")) {
-                Window w = new Window(size);
-                w.setLocationRelativeTo(null);
-                w.pack();
-                currentGame = new TwoPlayersGame(size, w);
-
-                dispose();
-                ((TwoPlayersGame)currentGame).playTheGame();
-            }
-        }
-    }
     public void endGame() {
 //        for(int i = 0; i < size; i++) {
 //            for(GameButton button : buttons[i]) {
