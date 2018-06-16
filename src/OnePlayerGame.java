@@ -17,7 +17,7 @@ public class OnePlayerGame extends Game {
     }
 
     void player1Turn() {
-        player1Score += countScoreAdded(window.currentButton, gameState);
+        player1Score += countScoreAdded(window.currentButton, gameState, 1);
         System.out.println("player1 score : " + player1Score);
         if (isGameEnded()) {
             window.endGame();
@@ -29,13 +29,12 @@ public class OnePlayerGame extends Game {
     }
 
     void player2Turn() {
-//        Point move = ai.chooseRandom();
-        Point move = ai.minimax(gameState);
+        Point move = ai.play(gameState);
         setGameStatus(move);
         GameButton chosenButton = window.buttons[move.x][move.y];
         chosenButton.setChosen();
         window.currentButton = move;
-        player2Score += countScoreAdded(window.currentButton, gameState);
+        player2Score += countScoreAdded(window.currentButton, gameState, 2);
         System.out.println("player2 score : " + player2Score);
         if (isGameEnded()) {
             window.endGame();

@@ -5,7 +5,6 @@ import java.util.Random;
 public class AI{
     Window window;
     Game game;
-    int[][] gameState;
     int size;
     ArrayList<Point> possibleMoves;
 
@@ -16,9 +15,25 @@ public class AI{
         size = window.size;
     }
 
-//    public Point play(int[][] gameStatus) {
-//
-//    }
+    public Point play(int[][] gameState) {
+        Point move;
+        if(size * size - game.movesCounter > 9) {
+            move = chooseBestClosing(gameState);
+            if(move == null) {
+                ArrayList<Point> safe = possibleSafe(gameState);
+                if(safe == null) {
+                    move = chooseRandom(gameState);
+                }
+                else {
+                    move = chooseRandom(gameState, safe);
+                }
+            }
+        }
+        else {
+            move = minimax(gameState);
+        }
+        return move;
+    }
 //
 //    public Point findBestMove() {
 //
@@ -27,19 +42,22 @@ public class AI{
 //    public int rateMove() {
 //
 //    }
-    public Point chooseRandom() {
-        possibleMoves = checkPossible(gameState);
-        Random random = new Random();
-        int possibleMovesSize = possibleMoves.size();
-        return possibleMovesSize != 0 ?  possibleMoves.get(random.nextInt(possibleMovesSize)) : null;
+    public Point chooseRandom(int[][] state) {
+        return chooseRandom(state, possibleMoves);
     }
 
-    private ArrayList<Point> checkPossible(int[][] gameStatus) {
+    public Point chooseRandom(int[][] state, ArrayList<Point> possible) {
+        possible = checkPossible(state);
+        Random random = new Random();
+        int possibleMovesSize = possible.size();
+        return possibleMovesSize != 0 ?  possible.get(random.nextInt(possibleMovesSize)) : null;
+    }
+
+    private ArrayList<Point> checkPossible(int[][] board) {
         ArrayList<Point> result = new ArrayList<>();
-        gameStatus = ((OnePlayerGame)game).gameState;
         for(int x  = 0; x < size; x++) {
             for (int y = 0; y < size; y++) {
-                if(gameStatus[x][y] == 0){
+                if(board[x][y] == 0){
                     result.add(new Point(x, y));
                 }
             }
@@ -48,18 +66,18 @@ public class AI{
     }
 
     public Point minimax(int[][] gameState) {//player = {1 lub 2}
-        int player = 1;
+        boolean player = true;
         int highestScoreDifference = Integer.MIN_VALUE;
         //highestScoreDifference = player1Score - player2Score;
-        Point bestMove = null;//best move returns higest difference (above 0)
+        Point bestMove = null;//best move returns highest difference (above 0)
         ArrayList<Point> possible = checkPossible(gameState);//all possible moves for NEW STATE
         int score;
         for(Point move : possible) {
-            int[][] state = gameState.clone();
-            state[move.x][move.y] = player;//the new state
+            int[][] state = copyTab(gameState);
+            state[move.x][move.y] = player ? 2 : 1;//the new state
             score = game.countScoreAdded(move, state);
-            int newPlayer = (player+1)%2 == 0 ? 1 : 2;
-            score += minimaxRec(newPlayer, state);
+            player = false;
+            score += minimaxRec(player, state);
             if(score > highestScoreDifference) {
                 highestScoreDifference = score;
                 bestMove = move;
@@ -68,7 +86,7 @@ public class AI{
         return bestMove;
     }
 
-    private int minimaxRec(int player, int[][] gameState) {
+    private int minimaxRec(boolean player, int[][] gameState) {
         ArrayList<Point> possible = checkPossible(gameState);
         if(possible.size() == 0) {
             return 0;
@@ -77,11 +95,11 @@ public class AI{
         int highestScore = Integer.MIN_VALUE;
         int score = 0;
         for(Point move : possible) {
-            int[][] state = gameState.clone();
-            state[move.x][move.y] = player;
+            int[][] state = copyTab(gameState);
+            state[move.x][move.y] = player ? 2 : 1;
 
-            int newPlayer = (player+1)%2 == 0 ? 1 : 2;
-            if(newPlayer == 1){
+            boolean newPlayer = !player;
+            if(newPlayer){
                 score += game.countScoreAdded(move, gameState);
             }
             else {
@@ -95,9 +113,52 @@ public class AI{
                 highestScore = score;
             }
         }
-        return player == 1 ? highestScore : lowestScore;
+        return player ? highestScore : lowestScore;
     }
-//    public Point chooseClosing() {
-//
-//    }
+
+    private int[][] copyTab(int[][] tab) {
+        int[][] copy = new int[tab.length][tab[0].length];
+        for(int i = 0; i < tab.length; i++) {
+            for(int j = 0; j < tab[i].length; j++) {
+                copy[i][j] = tab[i][j];
+            }
+        }
+        return copy;
+    }
+
+    public Point chooseBestClosing(int[][] gameState) {
+        checkPossible(gameState);
+        Point bestMove = new Point();
+        int maxWage = 0;
+        for(Point move : possibleMoves) {
+            int[][] board = copyTab(gameState);
+            board[move.x][move.y] = 1;
+            int score = game.countScoreAdded(move, board);
+            if(score > maxWage) {
+                maxWage = score;
+                bestMove = move;
+            }
+        }
+        return bestMove;
+    }
+
+    public ArrayList<Point> possibleSafe(int[][] gameState) {//returns all not danger possible moves;
+        checkPossible(gameState);
+        ArrayList<Point> possibleSafe = new ArrayList<>(possibleMoves);
+        ArrayList<Point> dangerMoves = new ArrayList<>();
+        for(Point move : possibleMoves) {
+            if(game.countZerosHorizontal(move, gameState) == 2){
+                dangerMoves.add(move);
+            }
+            else if(game.countZerosVertical(move, gameState) == 2) {
+                dangerMoves.add(move);
+            }else if(game.countZerosLeftDiagonal(move, gameState) == 2) {
+                dangerMoves.add(move);
+            }else if(game.countZerosRightDiagonal(move, gameState) == 2) {
+                dangerMoves.add(move);
+            }
+        }
+        possibleSafe.removeAll(dangerMoves);
+        return possibleSafe;
+    }
 }
