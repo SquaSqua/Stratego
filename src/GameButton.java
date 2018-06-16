@@ -7,8 +7,8 @@ public class GameButton extends JButton implements ActionListener{
     ImageIcon allay, enemy;
 //    static int turn;
     private boolean set = false;
-    private Point coordinates;
-    public GameButton(int boardSize, Point coordinates) {
+    private AIPoint coordinates;
+    public GameButton(int boardSize, AIPoint coordinates) {
 //        setTurn();
 //        allay = new ImageIcon("src/img/catBG.png");
 //        enemy = new ImageIcon("src/img/dogBG.png");
@@ -51,7 +51,7 @@ public class GameButton extends JButton implements ActionListener{
         return set;
     }
 
-    public Point getCoordinates() {
+    public AIPoint getCoordinates() {
         return coordinates;
     }
 

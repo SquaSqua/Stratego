@@ -14,7 +14,7 @@ public class Window extends JFrame implements ActionListener{
     JMenuBar menuBar;
     JMenu gameType;
     JMenuItem onePlayer, pcVsPc;
-    Point currentButton;
+    AIPoint currentButton;
     Game currentGame;
 
     public Window(int size) {
@@ -54,7 +54,7 @@ public class Window extends JFrame implements ActionListener{
         panel.setLayout(new GridLayout(size, size));
         for(int i = 0; i < size; i++) {
             for(int j = 0; j < size; j++) {
-                buttons[i][j] = new GameButton(size, new Point(i, j));
+                buttons[i][j] = new GameButton(size, new AIPoint(i, j));
                 panel.add(buttons[i][j]);
                 buttons[i][j].addActionListener(this);
             }

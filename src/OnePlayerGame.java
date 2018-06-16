@@ -29,7 +29,7 @@ public class OnePlayerGame extends Game {
     }
 
     void player2Turn() {
-        Point move = ai.play(gameState);
+        AIPoint move = ai.play(gameState);
         setGameStatus(move);
         GameButton chosenButton = window.buttons[move.x][move.y];
         chosenButton.setChosen();

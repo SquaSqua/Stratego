@@ -15,7 +15,7 @@ public class Game {
         gameState = new int[size][size];
     }
 
-    public int countScoreAdded(Point lastMove, int[][] gameState) {
+    public int countScoreAdded(AIPoint lastMove, int[][] gameState) {
         int score = 0;
         score += checkHorizontal(lastMove, gameState);
         score += checkVertical(lastMove, gameState);
@@ -24,7 +24,7 @@ public class Game {
         return score;
     }
 
-        public int checkVertical(Point lastMove, int[][] gameState) {
+        public int checkVertical(AIPoint lastMove, int[][] gameState) {
             int score = 0;
             boolean unset = false;
             for(int i = 0; i < size && !unset; i++) {
@@ -38,7 +38,7 @@ public class Game {
             return (unset || (score == 1)) ? 0 : score;
         }
 
-        public int checkHorizontal(Point lastMove, int[][] gameState) {
+        public int checkHorizontal(AIPoint lastMove, int[][] gameState) {
             int score = 0;
             boolean unset = false;
             for(int i = 0; i < size && !unset; i++) {
@@ -52,9 +52,9 @@ public class Game {
             return (unset || (score == 1)) ? 0 : score;
         }
 
-        public int checkLeftDiagonal(Point lastMove, int[][] gameState) {
+        public int checkLeftDiagonal(AIPoint lastMove, int[][] gameState) {
             int score = 0;
-            Point temp = new Point(lastMove.x, lastMove.y);
+            AIPoint temp = new AIPoint(lastMove.x, lastMove.y);
             boolean unset = false;
             while(temp.x >= 0 && temp.y < size && !unset) {
                 if(gameState[temp.x][temp.y] == 0) {
@@ -81,9 +81,9 @@ public class Game {
             return (unset || (score == 1)) ? 0 : score;
         }
 
-        public int checkRightDiagonal(Point lastMove, int[][] gameState) {
+        public int checkRightDiagonal(AIPoint lastMove, int[][] gameState) {
             int score = 0;
-            Point temp = new Point(lastMove.x, lastMove.y);
+            AIPoint temp = new AIPoint(lastMove.x, lastMove.y);
             boolean unset = false;
             while(temp.x >= 0 && temp.y >= 0 && !unset) {
                 if(gameState[temp.x][temp.y] == 0) {
@@ -111,7 +111,7 @@ public class Game {
         }
 
 
-    public int countScoreAdded(Point lastMove, int[][] gameState, int player) {
+    public int countScoreAdded(AIPoint lastMove, int[][] gameState, int player) {
         int score = 0;
         int temp = 0;
         temp += checkHorizontal(lastMove, gameState);
@@ -140,7 +140,7 @@ public class Game {
         return score;
     }
 
-        public void colorVertical(Point lastMove, int player) {
+        public void colorVertical(AIPoint lastMove, int player) {
             if(player == 1) {
                 for(int i = 0; i < size; i++) {
                     window.buttons[lastMove.x][i].setBackground(Color.decode(allay));//batman
@@ -153,7 +153,7 @@ public class Game {
             }
         }
 
-        public void colorHorizontal(Point lastMove, int player) {
+        public void colorHorizontal(AIPoint lastMove, int player) {
             if(player == 1) {
                 for(int i = 0; i < size; i++) {
                     window.buttons[i][lastMove.y].setBackground(Color.decode(allay));//batman
@@ -166,9 +166,9 @@ public class Game {
             }
         }
 
-        public void colorLeftDiagonal(Point lastMove, int player) {
+        public void colorLeftDiagonal(AIPoint lastMove, int player) {
 
-            Point temp = new Point(lastMove.x, lastMove.y);
+            AIPoint temp = new AIPoint(lastMove.x, lastMove.y);
             if(player == 1) {
                 while(temp.x >= 0 && temp.y < size) {
                     window.buttons[temp.x][temp.y].setBackground(Color.decode(allay));//batman
@@ -199,8 +199,8 @@ public class Game {
             }
         }
 
-        public void colorRightDiagonal(Point lastMove, int player) {
-            Point temp = new Point(lastMove.x, lastMove.y);
+        public void colorRightDiagonal(AIPoint lastMove, int player) {
+            AIPoint temp = new AIPoint(lastMove.x, lastMove.y);
             if(player == 1) {
                 while(temp.x >= 0 && temp.y >= 0) {
                     window.buttons[temp.x][temp.y].setBackground(Color.decode(allay));//batman
@@ -232,7 +232,7 @@ public class Game {
         }
 
 
-    public int countZerosVertical(Point move, int[][] gameState) {
+    public int countZerosVertical(AIPoint move, int[][] gameState) {
         int zeros = 0;
         for(int i = 0; i < size; i++) {
             if(gameState[move.x][i] == 0) {
@@ -242,7 +242,7 @@ public class Game {
         return zeros;
     }
 
-    public int countZerosHorizontal(Point move, int[][] gameState) {
+    public int countZerosHorizontal(AIPoint move, int[][] gameState) {
         int zeros = 0;
         for(int i = 0; i < size; i++) {
             if(gameState[i][move.y] == 0) {
@@ -252,9 +252,9 @@ public class Game {
         return zeros;
     }
 
-    public int countZerosLeftDiagonal(Point move, int[][] gameState) {
+    public int countZerosLeftDiagonal(AIPoint move, int[][] gameState) {
         int zeros = 0;
-        Point temp = new Point(move.x, move.y);
+        AIPoint temp = new AIPoint(move.x, move.y);
         while(temp.x >= 0 && temp.y < size) {
             if(gameState[temp.x][temp.y] == 0) {
                 zeros++;
@@ -274,9 +274,9 @@ public class Game {
         return zeros;
     }
 
-    public int countZerosRightDiagonal(Point move, int[][] gameState) {
+    public int countZerosRightDiagonal(AIPoint move, int[][] gameState) {
         int zeros = 0;
-        Point temp = new Point(move.x, move.y);
+        AIPoint temp = new AIPoint(move.x, move.y);
         while(temp.x >= 0 && temp.y >= 0) {
             if(gameState[temp.x][temp.y] == 0) {
                 zeros++;
@@ -300,7 +300,7 @@ public class Game {
         return movesCounter == size * size;
     }
 
-    public void setGameStatus(Point lastMove) {
+    public void setGameStatus(AIPoint lastMove) {
         int playerSign = movesCounter%2 == 1 ? 2 : 1;
         gameState[lastMove.x][lastMove.y] = playerSign;
 //        for(int i = 0; i < gameState.length; i++) {
