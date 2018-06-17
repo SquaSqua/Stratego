@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3d10a99b-ca8f-4449-8f59-b845807cf2e3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Stratego/AI.class" afterPath="$PROJECT_DIR$/out/production/Stratego/AI.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AI.java" afterPath="$PROJECT_DIR$/src/AI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Window.java" afterPath="$PROJECT_DIR$/src/Window.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,8 +22,8 @@
       <file leaf-file-name="Window.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Window.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="682">
-              <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
+            <state relative-caret-position="228">
+              <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -35,10 +34,12 @@
       <file leaf-file-name="GameButton.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GameButton.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="682">
-              <caret line="53" column="18" lean-forward="false" selection-start-line="53" selection-start-column="18" selection-end-line="53" selection-end-column="18" />
+            <state relative-caret-position="426">
+              <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1194#1195#0" expanded="true" />
+                <element signature="e#1221#1222#0" expanded="true" />
                 <element signature="e#1683#1684#0" expanded="true" />
                 <element signature="e#1717#1718#0" expanded="true" />
               </folding>
@@ -49,8 +50,8 @@
       <file leaf-file-name="OnePlayerGame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/OnePlayerGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+            <state relative-caret-position="382">
+              <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -59,9 +60,23 @@
       <file leaf-file-name="Game.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="272">
+              <caret line="304" column="0" lean-forward="false" selection-start-line="304" selection-start-column="0" selection-end-line="304" selection-end-column="0" />
+              <folding>
+                <element signature="method#Game#0;class#Game#0" expanded="false" />
+                <element signature="method#countScoreAdded#0;class#Game#0" expanded="false" />
+                <element signature="method#checkVertical#0;class#Game#0" expanded="false" />
+                <element signature="method#checkHorizontal#0;class#Game#0" expanded="false" />
+                <element signature="method#checkLeftDiagonal#0;class#Game#0" expanded="false" />
+                <element signature="method#checkRightDiagonal#0;class#Game#0" expanded="false" />
+                <element signature="method#colorVertical#0;class#Game#0" expanded="false" />
+                <element signature="method#colorHorizontal#0;class#Game#0" expanded="false" />
+                <element signature="method#colorLeftDiagonal#0;class#Game#0" expanded="false" />
+                <element signature="method#colorRightDiagonal#0;class#Game#0" expanded="false" />
+                <element signature="method#countZerosVertical#0;class#Game#0" expanded="false" />
+                <element signature="e#9612#9613#0" expanded="true" />
+                <element signature="e#9662#9663#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -69,10 +84,14 @@
       <file leaf-file-name="AI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1012">
-              <caret line="138" column="24" lean-forward="true" selection-start-line="138" selection-start-column="24" selection-end-line="138" selection-end-column="24" />
+            <state relative-caret-position="407">
+              <caret line="168" column="7" lean-forward="true" selection-start-line="117" selection-start-column="6" selection-end-line="168" selection-end-column="7" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="method#AI#0;class#AI#0" expanded="false" />
+                <element signature="method#chooseRandom#0;class#AI#0" expanded="false" />
+                <element signature="method#checkPossible#0;class#AI#0" expanded="false" />
+                <element signature="method#possibleSafe#0;class#AI#0" expanded="false" />
+                <element signature="method#copyTab#0;class#AI#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -127,8 +146,8 @@
         <option value="$PROJECT_DIR$/src/Runner.java" />
         <option value="$PROJECT_DIR$/src/OnePlayerGame.java" />
         <option value="$PROJECT_DIR$/src/AIPoint.java" />
-        <option value="$PROJECT_DIR$/src/Window.java" />
         <option value="$PROJECT_DIR$/src/Game.java" />
+        <option value="$PROJECT_DIR$/src/Window.java" />
         <option value="$PROJECT_DIR$/src/AI.java" />
       </list>
     </option>
@@ -156,9 +175,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="AndroidView" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -175,7 +195,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -348,7 +367,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19536424" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -417,18 +436,28 @@
           <option name="timeStamp" value="71" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/OnePlayerGame.java</url>
+          <line>19</line>
+          <properties />
+          <option name="timeStamp" value="75" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/AI.java</url>
           <line>18</line>
           <properties />
-          <option name="timeStamp" value="74" />
+          <option name="timeStamp" value="77" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="75" />
+      <option name="time" value="78" />
     </breakpoint-manager>
-    <watches-manager />
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="move" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Runner.java">
@@ -463,6 +492,8 @@
           <caret line="2" column="29" lean-forward="false" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1194#1195#0" expanded="true" />
+            <element signature="e#1221#1222#0" expanded="true" />
             <element signature="e#1683#1684#0" expanded="true" />
             <element signature="e#1717#1718#0" expanded="true" />
           </folding>
@@ -474,7 +505,11 @@
         <state relative-caret-position="44">
           <caret line="2" column="19" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#AI#0;class#AI#0" expanded="false" />
+            <element signature="method#chooseRandom#0;class#AI#0" expanded="false" />
+            <element signature="method#checkPossible#0;class#AI#0" expanded="false" />
+            <element signature="method#possibleSafe#0;class#AI#0" expanded="false" />
+            <element signature="method#copyTab#0;class#AI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -511,6 +546,8 @@
           <caret line="2" column="29" lean-forward="false" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1194#1195#0" expanded="true" />
+            <element signature="e#1221#1222#0" expanded="true" />
             <element signature="e#1683#1684#0" expanded="true" />
             <element signature="e#1717#1718#0" expanded="true" />
           </folding>
@@ -522,7 +559,11 @@
         <state relative-caret-position="44">
           <caret line="2" column="19" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#AI#0;class#AI#0" expanded="false" />
+            <element signature="method#chooseRandom#0;class#AI#0" expanded="false" />
+            <element signature="method#checkPossible#0;class#AI#0" expanded="false" />
+            <element signature="method#possibleSafe#0;class#AI#0" expanded="false" />
+            <element signature="method#copyTab#0;class#AI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -560,6 +601,8 @@
           <caret line="47" column="8" lean-forward="false" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1194#1195#0" expanded="true" />
+            <element signature="e#1221#1222#0" expanded="true" />
             <element signature="e#1683#1684#0" expanded="true" />
             <element signature="e#1717#1718#0" expanded="true" />
           </folding>
@@ -600,6 +643,8 @@
           <caret line="47" column="8" lean-forward="false" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1194#1195#0" expanded="true" />
+            <element signature="e#1221#1222#0" expanded="true" />
             <element signature="e#1683#1684#0" expanded="true" />
             <element signature="e#1717#1718#0" expanded="true" />
           </folding>
@@ -639,6 +684,8 @@
           <caret line="10" column="51" lean-forward="true" selection-start-line="10" selection-start-column="51" selection-end-line="11" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1194#1195#0" expanded="true" />
+            <element signature="e#1221#1222#0" expanded="true" />
             <element signature="e#1683#1684#0" expanded="true" />
             <element signature="e#1717#1718#0" expanded="true" />
           </folding>
@@ -771,8 +818,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Window.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="682">
-          <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
+        <state relative-caret-position="228">
+          <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -781,38 +828,58 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameButton.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="682">
-          <caret line="53" column="18" lean-forward="false" selection-start-line="53" selection-start-column="18" selection-end-line="53" selection-end-column="18" />
+        <state relative-caret-position="426">
+          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1194#1195#0" expanded="true" />
+            <element signature="e#1221#1222#0" expanded="true" />
             <element signature="e#1683#1684#0" expanded="true" />
             <element signature="e#1717#1718#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/OnePlayerGame.java">
+    <entry file="file://$PROJECT_DIR$/src/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="272">
+          <caret line="304" column="0" lean-forward="false" selection-start-line="304" selection-start-column="0" selection-end-line="304" selection-end-column="0" />
+          <folding>
+            <element signature="method#Game#0;class#Game#0" expanded="false" />
+            <element signature="method#countScoreAdded#0;class#Game#0" expanded="false" />
+            <element signature="method#checkVertical#0;class#Game#0" expanded="false" />
+            <element signature="method#checkHorizontal#0;class#Game#0" expanded="false" />
+            <element signature="method#checkLeftDiagonal#0;class#Game#0" expanded="false" />
+            <element signature="method#checkRightDiagonal#0;class#Game#0" expanded="false" />
+            <element signature="method#colorVertical#0;class#Game#0" expanded="false" />
+            <element signature="method#colorHorizontal#0;class#Game#0" expanded="false" />
+            <element signature="method#colorLeftDiagonal#0;class#Game#0" expanded="false" />
+            <element signature="method#colorRightDiagonal#0;class#Game#0" expanded="false" />
+            <element signature="method#countZerosVertical#0;class#Game#0" expanded="false" />
+            <element signature="e#9612#9613#0" expanded="true" />
+            <element signature="e#9662#9663#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game.java">
+    <entry file="file://$PROJECT_DIR$/src/OnePlayerGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state relative-caret-position="382">
+          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1012">
-          <caret line="138" column="24" lean-forward="true" selection-start-line="138" selection-start-column="24" selection-end-line="138" selection-end-column="24" />
+        <state relative-caret-position="407">
+          <caret line="168" column="7" lean-forward="true" selection-start-line="117" selection-start-column="6" selection-end-line="168" selection-end-column="7" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#AI#0;class#AI#0" expanded="false" />
+            <element signature="method#chooseRandom#0;class#AI#0" expanded="false" />
+            <element signature="method#checkPossible#0;class#AI#0" expanded="false" />
+            <element signature="method#possibleSafe#0;class#AI#0" expanded="false" />
+            <element signature="method#copyTab#0;class#AI#0" expanded="false" />
           </folding>
         </state>
       </provider>

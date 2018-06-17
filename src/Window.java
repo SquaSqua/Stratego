@@ -80,7 +80,10 @@ public class Window extends JFrame implements ActionListener{
                     if(currentGame.getClass().equals(OnePlayerGame.class)) {
                         currentGame.setGameStatus(currentButton);
                         ((OnePlayerGame)currentGame).player1Turn();
-                        ((OnePlayerGame)currentGame).player2Turn();
+                        if(!currentGame.isGameEnded()) {
+                            ((OnePlayerGame)currentGame).player2Turn();
+                        }
+
                     }
                 }
             }

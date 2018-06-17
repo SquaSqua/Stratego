@@ -21,7 +21,7 @@ public class AI{
             Object best = chooseBestClosing(gameState);
             if(best == null) {
                 ArrayList<Point> safe = possibleSafe(gameState);
-                if(safe == null) {
+                if(safe.size() == 0) {
                     Object randomMove = chooseRandom(gameState);
                     move = (Point) randomMove;
                 }
@@ -38,14 +38,7 @@ public class AI{
         }
         return move;
     }
-//
-//    public Point findBestMove() {
-//
-//    }
-//
-//    public int rateMove() {
-//
-//    }
+
     public Object chooseRandom(int[][] state) {
         possibleMoves = checkPossible(state);//aktualizacja possibleMoves
         return chooseRandom(possibleMoves);
@@ -69,17 +62,15 @@ public class AI{
         return result;
     }
 
-    public Point minimax(int[][] gameState) {//player = {1 lub 2}
+    public Point minimax(int[][] gameState) {//player - true = MAX
         boolean player = true;
         int highestScoreDifference = Integer.MIN_VALUE;
         //highestScoreDifference = player1Score - player2Score;
-
-        //czy tu nie ma problemu, że przypisuję nulla do Pointa? o.O
-
         Point bestMove = null;//best move returns highest difference (above 0)
         ArrayList<Point> possible = checkPossible(gameState);//all possible moves for NEW STATE
-        int score;
+//tu był score, gdyby coś przestało działać
         for(Point move : possible) {
+            int score;
             int[][] state = copyTab(gameState);
             state[move.x][move.y] = player ? 2 : 1;//the new state
             score = game.countScoreAdded(move, state);
@@ -100,18 +91,19 @@ public class AI{
         }
         int lowestScore = Integer.MAX_VALUE;
         int highestScore = Integer.MIN_VALUE;
-        int score = 0;
+//tu był score, gdyby coś przestało działać
         for(Point move : possible) {
+            int score = 0;
             int[][] state = copyTab(gameState);
             state[move.x][move.y] = player ? 2 : 1;
-
-            boolean newPlayer = !player;
-            if(newPlayer){
-                score += game.countScoreAdded(move, gameState);
+            //tu był wcześniej zmeiniany newPlayer
+            if(player){//tu był wcześniej newPlayer
+                score += game.countScoreAdded(move, state);//tu wcześniej był gameState
             }
             else {
-                score -= game.countScoreAdded(move, gameState);
+                score -= game.countScoreAdded(move, state);//tu wcześniej był gameState
             }
+            boolean newPlayer = !player;
             score += minimaxRec(newPlayer, state);
             if(score < lowestScore) {
                 lowestScore = score;
@@ -123,15 +115,58 @@ public class AI{
         return player ? highestScore : lowestScore;
     }
 
-    private int[][] copyTab(int[][] tab) {
-        int[][] copy = new int[tab.length][tab[0].length];
-        for(int i = 0; i < tab.length; i++) {
-            for(int j = 0; j < tab[i].length; j++) {
-                copy[i][j] = tab[i][j];
-            }
-        }
-        return copy;
-    }
+//    private Object alpha_beta_pruning(int[][] gameState) {
+//        boolean player = true;
+//        int highestScoreDifference = Integer.MIN_VALUE;
+//        Integer alpha = Integer.MIN_VALUE;
+//        Integer beta = Integer.MAX_VALUE;
+//        //highestScoreDifference = player1Score - player2Score;
+//        Point bestMove = null;//best move returns highest difference (above 0)
+//        ArrayList<Point> possible = checkPossible(gameState);//all possible moves for NEW STATE
+//        int score;
+//        for(Point move : possible) {
+//            int[][] state = copyTab(gameState);
+//            state[move.x][move.y] = player ? 2 : 1;//new state
+//            score = game.countScoreAdded(move, state);
+//            player = false;
+//            score += alpha_beta_pruningRec(player, state, alpha, beta);
+//            if(score > highestScoreDifference) {
+//                highestScoreDifference = score;
+//                bestMove = move;
+//            }
+//        }
+//        return bestMove;
+//    }
+
+//    private Integer alpha_beta_pruningRec(boolean player, int[][] board, Integer a, Integer b) {
+//        ArrayList<Point> possible = checkPossible(board);
+//        if(possible.size() == 0) {//check if leaf
+//            return 0;
+//        }
+//        Integer alpha = a;//maximum węzłów nimimalnych
+//        Integer beta = b;//minimum węzłów maxymalnych
+//        int score = 0;
+//        for(Point move : possible) {
+//            int[][] state = copyTab(board);
+//            state[move.x][move.y] = player ? 2 : 1;
+//            boolean newPlayer = !player;
+//            if(newPlayer){
+//                score += game.countScoreAdded(move, state);
+//            }
+//            else {
+//                score -= game.countScoreAdded(move, state);
+//            }
+//            score += alpha_beta_pruningRec(newPlayer, state);
+//            if(score < lowestScore) {
+//                lowestScore = score;
+//            }
+//            if(score > highestScore) {
+//                highestScore = score;
+//            }
+//        }
+//
+//        return move;
+//    }
 
     public Object chooseBestClosing(int[][] gameState) {
         possibleMoves = checkPossible(gameState);
@@ -167,5 +202,15 @@ public class AI{
         }
         possibleSafe.removeAll(dangerMoves);
         return possibleSafe;
+    }
+
+    private int[][] copyTab(int[][] tab) {
+        int[][] copy = new int[tab.length][tab[0].length];
+        for(int i = 0; i < tab.length; i++) {
+            for(int j = 0; j < tab[i].length; j++) {
+                copy[i][j] = tab[i][j];
+            }
+        }
+        return copy;
     }
 }
