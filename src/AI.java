@@ -18,15 +18,19 @@ public class AI{
     public Point play(int[][] gameState) {
         Point move;
         if(size * size - game.movesCounter > 9) {
-            move = chooseBestClosing(gameState);
-            if(move == null) {
+            Object best = chooseBestClosing(gameState);
+            if(best == null) {
                 ArrayList<Point> safe = possibleSafe(gameState);
                 if(safe == null) {
-                    move = chooseRandom(gameState);
+                    Object randomMove = chooseRandom(gameState);
+                    move = (Point) randomMove;
                 }
                 else {
-                    move = chooseRandom(gameState, safe);
+                    move = (Point)chooseRandom(safe);
                 }
+            }
+            else {
+                move = (Point)best;
             }
         }
         else {
@@ -42,12 +46,12 @@ public class AI{
 //    public int rateMove() {
 //
 //    }
-    public Point chooseRandom(int[][] state) {
-        return chooseRandom(state, possibleMoves);
+    public Object chooseRandom(int[][] state) {
+        possibleMoves = checkPossible(state);//aktualizacja possibleMoves
+        return chooseRandom(possibleMoves);
     }
 
-    public Point chooseRandom(int[][] state, ArrayList<Point> possible) {
-        possible = checkPossible(state);
+    public Object chooseRandom(ArrayList<Point> possible) {
         Random random = new Random();
         int possibleMovesSize = possible.size();
         return possibleMovesSize != 0 ?  possible.get(random.nextInt(possibleMovesSize)) : null;
@@ -69,6 +73,9 @@ public class AI{
         boolean player = true;
         int highestScoreDifference = Integer.MIN_VALUE;
         //highestScoreDifference = player1Score - player2Score;
+
+        //czy tu nie ma problemu, że przypisuję nulla do Pointa? o.O
+
         Point bestMove = null;//best move returns highest difference (above 0)
         ArrayList<Point> possible = checkPossible(gameState);//all possible moves for NEW STATE
         int score;
@@ -126,9 +133,9 @@ public class AI{
         return copy;
     }
 
-    public Point chooseBestClosing(int[][] gameState) {
-        checkPossible(gameState);
-        Point bestMove = new Point();
+    public Object chooseBestClosing(int[][] gameState) {
+        possibleMoves = checkPossible(gameState);
+        Point bestMove = null;
         int maxWage = 0;
         for(Point move : possibleMoves) {
             int[][] board = copyTab(gameState);
@@ -143,7 +150,7 @@ public class AI{
     }
 
     public ArrayList<Point> possibleSafe(int[][] gameState) {//returns all not danger possible moves;
-        checkPossible(gameState);
+        possibleMoves = checkPossible(gameState);
         ArrayList<Point> possibleSafe = new ArrayList<>(possibleMoves);
         ArrayList<Point> dangerMoves = new ArrayList<>();
         for(Point move : possibleMoves) {
