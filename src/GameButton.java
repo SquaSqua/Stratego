@@ -51,6 +51,9 @@ public class GameButton extends JButton implements ActionListener{
         return set;
     }
 
+    public void seted(){
+        set = true;
+    }
     public Point getCoordinates() {
         return coordinates;
     }

@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Game {
 
@@ -6,6 +7,10 @@ public class Game {
     Window window;
     int[][] gameState;//0 - unset, 1 - player1, 2 - player2
     public static int movesCounter = 0;
+    int player1Score;
+    int player2Score;
+    ArrayList<Long> times = new ArrayList<>();
+    ArrayList<Integer> nodes = new ArrayList<>();
     String allay = "#ffb74d";
     String enemy = "#663399";
 
@@ -13,6 +18,8 @@ public class Game {
         this.size = size;
         window = w;
         gameState = new int[size][size];
+        player1Score = 0;
+        player2Score = 0;
     }
 
     public int countScoreAdded(Point lastMove, int[][] gameState) {
@@ -303,12 +310,17 @@ public class Game {
     public void setGameStatus(Point lastMove) {
         int playerSign = movesCounter%2 == 1 ? 2 : 1;
         gameState[lastMove.x][lastMove.y] = playerSign;
-//        for(int i = 0; i < gameState.length; i++) {
-//            for(int j = 0; j < gameState[0].length; j++) {
-//                System.out.print(gameState[i][j] + ", ");
-//            }
-//            System.out.println();
-//        }
+//        printGameState();
+    }
+    public void printGameState() {
+        System.out.println("_________________");
+        for(int i = 0; i < gameState.length; i++) {
+            for(int j = 0; j < gameState[0].length; j++) {
+                System.out.print(gameState[i][j] + ", ");
+            }
+            System.out.println();
+        }
+        System.out.println("_________________");
     }
 
 }

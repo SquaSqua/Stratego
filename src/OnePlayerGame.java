@@ -1,23 +1,27 @@
 import java.awt.*;
 
 public class OnePlayerGame extends Game {
-
-    int userScore;
     AI ai;
-    int player1Score;
-    int player2Score;
+    int depthSize;
+    boolean isMiniMax;
+    boolean isSorted;
 
-
-    OnePlayerGame(int size, Window w) {
+    OnePlayerGame(int size, Window w, int depthSize, boolean isMiniMax, boolean isSorted) {
         super(size, w);
-        ai = new AI(window, this);
-        userScore = 0;
+        this.depthSize = depthSize;
+        this.isMiniMax = isMiniMax;
+        this.isSorted = isSorted;
         player1Score = 0;
         player2Score = 0;
     }
 
+    public void initializeAI(){
+        ai = new AI(window, window.currentGame, depthSize, isMiniMax, isSorted);
+    }
+
     void player1Turn() {
         player1Score += countScoreAdded(window.currentButton, gameState, 1);
+        window.pointsField.setText("Gracz nr 1    " + player1Score + "  :  " + player2Score + "    Gracz nr 2");
         System.out.println("player1 score : " + player1Score);
         if (isGameEnded()) {
             window.endGame();
@@ -29,19 +33,27 @@ public class OnePlayerGame extends Game {
     }
 
     void player2Turn() {
-        Point move = ai.play(gameState);
-        setGameStatus(move);
-        GameButton chosenButton = window.buttons[move.x][move.y];
-        chosenButton.setChosen();
-        window.currentButton = move;
-        player2Score += countScoreAdded(window.currentButton, gameState, 2);
-        System.out.println("player2 score : " + player2Score);
-        if (isGameEnded()) {
-            window.endGame();
-        }
-        movesCounter += 1;
-        if (isGameEnded()) {
-            window.endGame();
+//        Point move = ai.play(gameState);
+//        Object o = ai.alpha_beta_pruning(gameState);
+        Object o = ai.minimax(gameState);
+        if(o != null) {
+            Point move = (Point) o;
+
+            setGameStatus(move);
+            GameButton chosenButton = window.buttons[move.x][move.y];
+            chosenButton.setChosen();
+            window.currentButton = move;
+            player2Score += countScoreAdded(window.currentButton, gameState, 2);
+            window.pointsField.setText("Gracz nr 1    " + player1Score + "  :  " + player2Score + "    Gracz nr 2");
+            window.pointsField.setText(window.pointsField.getText());
+            System.out.println("player2 score : " + player2Score);
+            if (isGameEnded()) {
+                window.endGame();
+            }
+            movesCounter += 1;
+            if (isGameEnded()) {
+                window.endGame();
+            }
         }
     }
 
