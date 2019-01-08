@@ -98,7 +98,7 @@ public class Window extends JFrame implements ActionListener{
         //rightSubpanel
         depthLabel = new JLabel("Głębokość: ");
         depthInput = new JTextField();
-        depthInput.setText("3");
+        depthInput.setText("4");
         depthField = new JPanel();
         heuristicLabel = new JLabel("Heurystyka: ");
         PC1 = new JLabel("Komputer1");
@@ -118,7 +118,7 @@ public class Window extends JFrame implements ActionListener{
 
         depthLabel2 = new JLabel("Głębokość: ");
         depthInput2 = new JTextField();
-        depthInput2.setText("3");
+        depthInput2.setText("4");
         depthField2 = new JPanel();
         heuristicLabel2 = new JLabel("Heurystyka: ");
         heuristicsMenu2 = new ButtonGroup();
@@ -296,20 +296,22 @@ public class Window extends JFrame implements ActionListener{
     public String dataGenerator(ArrayList<Long> times, ArrayList<Integer> nodes) {
         String result = "";
         StringBuilder sB = new StringBuilder(result);
+        sB.append("Czas:\n");
         if(times.size()%2 == 0){
             for(int i = 0; i < times.size(); i++) {
-                sB.append(times.get(i) + "," + times.get(++i));
+                sB.append(times.get(i) + ", " + times.get(++i));
                 sB.append("\n");
             }
         }
         else {
             for(int i = 0; i < times.size() - 1; i++) {
-                sB.append(times.get(i) + "," + times.get(++i));
+                sB.append(times.get(i) + ", " + times.get(++i));
                 sB.append("\n");
             }
             sB.append(times.get(times.size()-1));
         }
         sB.append("\n");
+        sB.append("Liczba przejrzanych węzłów\n");
         if(nodes.size()%2 == 0){
             for(int i = 0; i < nodes.size(); i++) {
                 sB.append(nodes.get(i) + "," + nodes.get(++i));

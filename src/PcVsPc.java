@@ -22,7 +22,7 @@ public class PcVsPc extends Game {
     }
 
     void player1Turn() {
-        Object o = player1.minimax(gameState);
+        Object o = player1.play(gameState);
         if(o != null) {
             Point move = (Point) o;
 //            System.out.println("player1:");
@@ -40,7 +40,7 @@ public class PcVsPc extends Game {
     }
 
     void player2Turn() {
-        Object o = player2.minimax(gameState);
+        Object o = player2.play(gameState);
         if(o != null) {
             Point move = (Point) o;
 //            System.out.println("player2:");

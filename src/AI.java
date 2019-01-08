@@ -38,7 +38,7 @@ public class AI{
         return move;
     }
 
-//    public Point play(int[][] gameState) {
+//    public Point play(int[][] gameState) {//odkomentowane
 //        Point move;
 //        if(size * size - game.movesCounter > 9) {
 //            Object best = chooseBestClosing(gameState);
@@ -85,14 +85,15 @@ public class AI{
         return result;
     }
 
-    public Point minimax(int[][] gameState) {
+    private Point minimax(int[][] gameState) {
         minimaxNodes = 0;
-        long start=System.currentTimeMillis();
+//        long start = System.currentTimeMillis();
+        long start = System.nanoTime();
         Point bestMove = null;
         int highestScoreDifference = Integer.MIN_VALUE;
         possibleMoves = checkPossible(gameState);
         if(isSorted) {
-//            possibleMoves = sortPossibleMoves(possibleMoves, gameState);
+//            possibleMoves = sortPossibleMoves(possibleMoves, gameState);//odkomentowane
 //            Collections.shuffle(possibleMoves);
         }
         else {
@@ -109,7 +110,8 @@ public class AI{
             }
             gameState[move.x][move.y] = 0;
         }
-        long finish=System.currentTimeMillis() - start;
+//        long finish=System.currentTimeMillis() - start;
+        long finish=System.nanoTime() - start;
         game.times.add(finish);
         game.nodes.add(minimaxNodes);
         return bestMove;
@@ -124,7 +126,7 @@ public class AI{
         int highestScore = Integer.MIN_VALUE;
 
         if(isSorted) {
-//            possibleMoves = sortPossibleMoves(possibleMoves, gameState);
+//            possibleMoves = sortPossibleMoves(possibleMoves, gameState);//odkomentowane
 //            Collections.shuffle(possibleMoves);
         }
         else {
@@ -153,19 +155,22 @@ public class AI{
         return isMax ? highestScore : lowestScore;
     }
 
-    public Object alpha_beta_pruning(int[][] gameState) {
+    private Object alpha_beta_pruning(int[][] gameState) {
+
         aBNodes = 0;
-        long start=System.currentTimeMillis();
+//        long start=System.currentTimeMillis();
+        long start=System.nanoTime();
         Point bestMove = null;
         Integer alpha = Integer.MIN_VALUE;
         Integer beta = Integer.MAX_VALUE;
         ArrayList<Point> possible = checkPossible(gameState);
         if(isSorted) {
-//            possibleMoves = sortPossibleMoves(possibleMoves, gameState);
+//            possibleMoves = sortPossibleMoves(possibleMoves, gameState);//tu odkomentowane
 //            Collections.shuffle(possibleMoves);
         }
         else {
-            Collections.shuffle(possibleMoves);
+
+            Collections.shuffle(possible);
         }
         for(Point move : possible) {
             gameState[move.x][move.y] = 2;
@@ -178,7 +183,8 @@ public class AI{
             }
             gameState[move.x][move.y] = 0;
         }
-        long finish=System.currentTimeMillis() - start;
+//        long finish=System.currentTimeMillis() - start;
+        long finish=System.nanoTime() - start;
         game.times.add(finish);
         game.nodes.add(aBNodes);
         return bestMove;
@@ -192,11 +198,11 @@ public class AI{
         Integer alpha = a;
         Integer beta = b;
         if(isSorted) {
-//            possibleMoves = sortPossibleMoves(possibleMoves, gameState);
+//            possibleMoves = sortPossibleMoves(possibleMoves, board);//tu odkomentowane
 //            Collections.shuffle(possibleMoves);
         }
         else {
-            Collections.shuffle(possibleMoves);
+            Collections.shuffle(possible);
         }
         if(isMax) {
             for(Point move : possible) {
