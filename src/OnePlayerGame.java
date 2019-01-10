@@ -35,7 +35,7 @@ public class OnePlayerGame extends Game {
     void player2Turn() {
 //        Point move = ai.play(gameState);
 //        Object o = ai.alpha_beta_pruning(gameState);
-        Object o = ai.play(gameState);
+        Object o = ai.playAgainstHuman(gameState);
         if(o != null) {
             Point move = (Point) o;
 
