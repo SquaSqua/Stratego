@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Objects;
 import java.util.Random;
 
 public class AI{
@@ -9,10 +8,9 @@ public class AI{
     Game game;
     int size;
     int depthSize;
-    ArrayList<Point> possibleMoves;
     boolean isMiniMax;
     boolean isSorted;
-    int minimaxNodes;
+    int minmaxNodes;
     int aBNodes;
 
     public AI(Window window, Game game, int depthSize, boolean isMiniMax, boolean isSorted) {
@@ -23,14 +21,14 @@ public class AI{
         this.depthSize = depthSize;
         this.isMiniMax = isMiniMax;
         this.isSorted = isSorted;
-        minimaxNodes = 0;
+        minmaxNodes = 0;
         aBNodes = 0;
     }
 
     public Object play(int[][] gameState) {
         Point move;
         if(isMiniMax){
-            move = minimax(gameState);
+            move = minmax(gameState);
         }
         else {
             move = (Point)alpha_beta_pruning(gameState);
@@ -46,7 +44,7 @@ public class AI{
                 ArrayList<Point> safe = possibleSafe(gameState);
                 if(safe.size() == 0) {
                     Object randomMove = chooseRandom(gameState);
-                    move = (Point) randomMove;
+                    move = (Point)randomMove;
                 }
                 else {
                     move = (Point)chooseRandom(safe);
@@ -58,7 +56,7 @@ public class AI{
         }
         else {
             if(isMiniMax){
-                move = minimax(gameState);
+                move = minmax(gameState);
             }
             else {
                 move = (Point)alpha_beta_pruning(gameState);
@@ -67,12 +65,11 @@ public class AI{
         return move;
     }
 
-    public Object chooseRandom(int[][] state) {
-        possibleMoves = checkPossible(state);//aktualizacja possibleMoves
-        return chooseRandom(possibleMoves);
+    private Object chooseRandom(int[][] state) {
+        return chooseRandom(checkPossible(state));
     }
 
-    public Object chooseRandom(ArrayList<Point> possible) {
+    private Object chooseRandom(ArrayList<Point> possible) {
         Random random = new Random();
         int possibleMovesSize = possible.size();
         return possibleMovesSize != 0 ?  possible.get(random.nextInt(possibleMovesSize)) : null;
@@ -90,27 +87,25 @@ public class AI{
         return result;
     }
 
-    private Point minimax(int[][] gameState) {
-        minimaxNodes = 0;
+    private Point minmax(int[][] gameState) {
+        minmaxNodes = 0;
 //        long start = System.currentTimeMillis();
         long start = System.nanoTime();
         Point bestMove = null;
         int highestScoreDifference = Integer.MIN_VALUE;
-        possibleMoves = checkPossible(gameState);
+        ArrayList<Point> possibleMoves = checkPossible(gameState);
         if(isSorted) {
             possibleMoves = sortPossibleMoves(possibleMoves, gameState);//odkomentowane
-//            Collections.shuffle(possibleMoves);
         }
         else {
             Collections.shuffle(possibleMoves);
         }
-//        for(Point move : possibleMoves) {
         for(int i = 0; i < possibleMoves.size(); i++){
             Point move = possibleMoves.get(i);
             gameState[move.x][move.y] = 1;
-            minimaxNodes++;
+            minmaxNodes++;
             int score = game.countScoreAdded(move, gameState);
-            score += minimaxRec(false, gameState, 1);
+            score += minmaxRec(false, gameState, 1);
             if(highestScoreDifference < score) {
                 highestScoreDifference = score;
                 bestMove = move;
@@ -120,29 +115,28 @@ public class AI{
 //        long finish=System.currentTimeMillis() - start;
         long finish=System.nanoTime() - start;
         game.times.add(finish);
-        game.nodes.add(minimaxNodes);
+        game.nodes.add(minmaxNodes);
         return bestMove;
     }
 
-    private int minimaxRec(boolean isMax, int[][] gameState, int depth) {
-        ArrayList<Point> possible = checkPossible(gameState);
-        if(possible.size() == 0 || depth == depthSize) {
+    private int minmaxRec(boolean isMax, int[][] gameState, int depth) {
+        ArrayList<Point> possibleMoves = checkPossible(gameState);
+        if(possibleMoves.size() == 0 || depth == depthSize) {
             return 0;
         }
         int lowestScore = Integer.MAX_VALUE;
-        int highestScore = Integer.MIN_VALUE;
+        int highestScore = -Integer.MAX_VALUE;
 
         if(isSorted) {
             possibleMoves = sortPossibleMoves(possibleMoves, gameState);//odkomentowane
-//            Collections.shuffle(possibleMoves);
         }
         else {
             Collections.shuffle(possibleMoves);
         }
-        for(Point move : possible) {
+        for(Point move : possibleMoves) {
             int score = 0;
             gameState[move.x][move.y] = isMax ? 2 : 1;
-            minimaxNodes++;
+            minmaxNodes++;
             if(isMax){
                 score += game.countScoreAdded(move, gameState);
             }
@@ -150,7 +144,7 @@ public class AI{
                 score -= game.countScoreAdded(move, gameState);
             }
             boolean newPlayer = !isMax;
-            score += minimaxRec(newPlayer, gameState, depth + 1);
+            score += minmaxRec(newPlayer, gameState, depth + 1);
             gameState[move.x][move.y] = 0;
             if(score < lowestScore) {
                 lowestScore = score;
@@ -168,18 +162,17 @@ public class AI{
 //        long start=System.currentTimeMillis();
         long start=System.nanoTime();
         Point bestMove = null;
-        Integer alpha = Integer.MIN_VALUE;
+        Integer alpha = -Integer.MAX_VALUE;
         Integer beta = Integer.MAX_VALUE;
-        ArrayList<Point> possible = checkPossible(gameState);
+        ArrayList<Point> possibleMoves = checkPossible(gameState);
         if(isSorted) {
             possibleMoves = sortPossibleMoves(possibleMoves, gameState);//tu odkomentowane
-//            Collections.shuffle(possibleMoves);
         }
         else {
 
-            Collections.shuffle(possible);
+            Collections.shuffle(possibleMoves);
         }
-        for(Point move : possible) {
+        for(Point move : possibleMoves) {
             gameState[move.x][move.y] = 2;
             aBNodes++;
             int score = game.countScoreAdded(move, gameState);
@@ -198,21 +191,20 @@ public class AI{
     }
 
     private Integer alpha_beta_pruningRec(boolean isMax, int[][] board, Integer a, Integer b, int depth) {
-        ArrayList<Point> possible = checkPossible(board);
-        if(possible.size() == 0 || depth == depthSize) {
+        ArrayList<Point> possibleMoves = checkPossible(board);
+        if(possibleMoves.size() == 0 || depth == depthSize) {
             return 0;
         }
         Integer alpha = a;
         Integer beta = b;
         if(isSorted) {
             possibleMoves = sortPossibleMoves(possibleMoves, board);//tu odkomentowane
-//            Collections.shuffle(possibleMoves);
         }
         else {
-            Collections.shuffle(possible);
+            Collections.shuffle(possibleMoves);
         }
         if(isMax) {
-            for(Point move : possible) {
+            for(Point move : possibleMoves) {
                 int score;
                 board[move.x][move.y] = 2;
                 aBNodes++;
@@ -228,7 +220,7 @@ public class AI{
             }
         }
         else {
-            for(Point move : possible) {
+            for(Point move : possibleMoves) {
                 int score;
                 board[move.x][move.y] = 1;
                 aBNodes++;
@@ -247,7 +239,7 @@ public class AI{
     }
 
     public Object chooseBestClosing(int[][] gameState) {
-        possibleMoves = checkPossible(gameState);
+        ArrayList<Point> possibleMoves = checkPossible(gameState);
         Point bestMove = null;
         int maxWage = 0;
         for(Point move : possibleMoves) {
@@ -299,10 +291,9 @@ public class AI{
 //    }
 
     public ArrayList<Point> possibleSafe(int[][] gameState) {//returns all not danger possible moves;
-        possibleMoves = checkPossible(gameState);
-        ArrayList<Point> possibleSafe = new ArrayList<>(possibleMoves);
+        ArrayList<Point> possibleSafe = checkPossible(gameState);
         ArrayList<Point> dangerMoves = new ArrayList<>();
-        for(Point move : possibleMoves) {
+        for(Point move : possibleSafe) {
             if(game.countZerosHorizontal(move, gameState) == 2){
                 dangerMoves.add(move);
             }
