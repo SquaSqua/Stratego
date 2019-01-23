@@ -95,7 +95,7 @@ public class AI{
         int highestScoreDifference = Integer.MIN_VALUE;
         ArrayList<Point> possibleMoves = checkPossible(gameState);
         if(isSorted) {
-            possibleMoves = sortPossibleMoves(possibleMoves, gameState);//odkomentowane
+            possibleMoves = sortPossibleMoves(possibleMoves, gameState);
         }
         else {
             Collections.shuffle(possibleMoves);
@@ -128,7 +128,7 @@ public class AI{
         int highestScore = -Integer.MAX_VALUE;
 
         if(isSorted) {
-            possibleMoves = sortPossibleMoves(possibleMoves, gameState);//odkomentowane
+            possibleMoves = sortPossibleMoves(possibleMoves, gameState);
         }
         else {
             Collections.shuffle(possibleMoves);
@@ -166,7 +166,7 @@ public class AI{
         Integer beta = Integer.MAX_VALUE;
         ArrayList<Point> possibleMoves = checkPossible(gameState);
         if(isSorted) {
-            possibleMoves = sortPossibleMoves(possibleMoves, gameState);//tu odkomentowane
+            possibleMoves = sortPossibleMoves(possibleMoves, gameState);
         }
         else {
 
@@ -198,7 +198,7 @@ public class AI{
         Integer alpha = a;
         Integer beta = b;
         if(isSorted) {
-            possibleMoves = sortPossibleMoves(possibleMoves, board);//tu odkomentowane
+            possibleMoves = sortPossibleMoves(possibleMoves, board);
         }
         else {
             Collections.shuffle(possibleMoves);
@@ -224,7 +224,7 @@ public class AI{
                 int score;
                 board[move.x][move.y] = 1;
                 aBNodes++;
-                score = -game.countScoreAdded(move, board);//można tak?
+                score = -game.countScoreAdded(move, board);
                 score += alpha_beta_pruningRec(!isMax, board, alpha, beta, depth + 1);
                 board[move.x][move.y] = 0;
                 if(score < beta) {
