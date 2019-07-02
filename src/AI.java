@@ -219,8 +219,7 @@ public class AI{
                 }
             }
         }
-        else {
-            for(Point move : possibleMoves) {
+        else {            for(Point move : possibleMoves) {
                 int score;
                 board[move.x][move.y] = 1;
                 aBNodes++;
